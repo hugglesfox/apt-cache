@@ -27,7 +27,7 @@ pub fn apt_cache(
         .map(|s| s.to_string())
         .collect();
 
-    match packages.iter().len() {
+    match packages.len() {
         0 => None,
         _ => Some(packages),
     }
