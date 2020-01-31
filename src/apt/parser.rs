@@ -1,4 +1,4 @@
-//! Parsers extract relevent package names each line of an output from an `apt-cache` command.
+//! Parsers extract relevent package names from each line of an output from an `apt-cache` command.
 
 pub fn search(s: &str) -> Option<&str> {
     s.split_whitespace().next()
