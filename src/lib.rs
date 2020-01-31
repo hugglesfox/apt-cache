@@ -71,6 +71,9 @@ mod tests {
 
     #[test]
     fn test_depends() {
-        assert!(create_pkg().depends().unwrap().contains(&Package::new("base-files").unwrap()))
+        assert!(create_pkg()
+            .depends()
+            .unwrap()
+            .contains(&Package::new("base-files").unwrap()))
     }
 }
