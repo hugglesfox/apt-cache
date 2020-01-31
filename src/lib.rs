@@ -16,7 +16,7 @@
 #![feature(str_strip)]
 pub mod apt;
 
-use apt::parser::{depends, search};
+use apt::parser::{depends, search, recommends};
 use apt::{apt_cache, AptError};
 
 #[derive(PartialEq)]
@@ -48,10 +48,19 @@ impl Package {
     }
 
     /// Get packages marked as depends.
-    ///
-    /// Returns None is there are no dependencies.
     pub fn depends(&self) -> Option<Vec<Package>> {
         apt_cache("depends", self.name.as_str(), &depends).and_then(|v| {
+            Some(
+                v.iter()
+                    .map(|p| Package::new(p).expect("Error parsing dependancy"))
+                    .collect::<Vec<Package>>(),
+            )
+        })
+    }
+
+    /// Get packages marked as recommends.
+    pub fn recommends(&self) -> Option<Vec<Package>> {
+        apt_cache("depends", self.name.as_str(), &recommends).and_then(|v| {
             Some(
                 v.iter()
                     .map(|p| Package::new(p).expect("Error parsing dependancy"))

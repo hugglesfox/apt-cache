@@ -1,13 +1,15 @@
 //! Parsers extract relevent package names each line of an output from an `apt-cache` command.
 
-/// Parses each line of the output of `apt-cache search`
 pub fn search(s: &str) -> Option<&str> {
     s.split_whitespace().next()
 }
 
-/// Parses each line of the output of `apt-cache depends`
 pub fn depends(s: &str) -> Option<&str> {
     s.trim().strip_prefix("Depends: ")
+}
+
+pub fn recommends(s: &str) -> Option<&str> {
+    s.trim().strip_prefix("Recommends: ")
 }
 
 #[cfg(test)]
