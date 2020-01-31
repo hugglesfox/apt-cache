@@ -35,8 +35,8 @@ pub fn apt_cache(
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use super::parser::*;
+    use super::*;
 
     #[test]
     fn test_apt_cache() {

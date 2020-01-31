@@ -16,10 +16,13 @@
 #![feature(str_strip)]
 pub mod apt;
 
-use apt::parser::{depends, search, recommends};
+use apt::parser::{depends, recommends, search};
 use apt::{apt_cache, AptError};
+use serde::{Deserialize, Serialize};
+use std::io;
+use std::process::{Command, Output};
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Deserialize, Serialize)]
 pub struct Package {
     name: String,
 }
