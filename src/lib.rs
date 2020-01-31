@@ -71,6 +71,10 @@ impl Package {
             )
         })
     }
+
+    pub fn get_source(&self) -> io::Result<Output> {
+        Command::new("apt").arg("source").arg(self.name.as_str()).output()
+    }
 }
 
 #[cfg(test)]
