@@ -6,6 +6,7 @@ edition = "2018"
 description = "A rust crate to interface the apt-cache command"
 license = "MIT"
 repository = "https://github.com/hugglesfox/apt-cache"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
