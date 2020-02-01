@@ -29,4 +29,10 @@ mod tests {
         assert_eq!(depends("  Depends: debianutils").unwrap(), "debianutils");
         assert!(depends("bash").is_none())
     }
+
+    #[test]
+    fn test_reccommends() {
+        assert_eq!(recommends("  Recommends: less").unwrap(), "less");
+        assert!(recommends("bash").is_none())
+    }
 }
