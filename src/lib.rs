@@ -32,21 +32,21 @@ impl Package {
     /// Create a new package
     ///
     /// Returns Err if package is not in the apt cache.
-    pub fn new<T: Copy + Into<String>>(s: T) -> Result<Self, AptError> {
-        match apt_cache("search", &s.into(), &search) {
+    pub fn new<T: AsRef<str>>(s: T) -> Result<Self, AptError> {
+        match apt_cache("search", s.as_ref(), &search) {
             Some(p) => {
-                if p.contains(&s.into()) {
-                    Ok(Package { name: s.into() })
+                if p.contains(&s.as_ref().to_string()) {
+                    Ok(Package { name: s.as_ref().to_string() })
                 } else {
                     Err(AptError::NotFound(format!(
                         "The package \"{}\" was not found",
-                        s.into()
+                        s.as_ref()
                     )))
                 }
             }
             None => Err(AptError::NotFound(format!(
                 "The package \"{}\" was not found",
-                s.into()
+                s.as_ref()
             ))),
         }
     }
