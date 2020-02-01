@@ -16,6 +16,7 @@
 #![feature(str_strip)]
 pub mod apt;
 
+use std::path::Path;
 use apt::parser::{depends, recommends, search};
 use apt::{apt_cache, AptError};
 use serde::{Deserialize, Serialize};
@@ -72,8 +73,8 @@ impl Package {
         })
     }
 
-    pub fn get_source(&self) -> io::Result<Output> {
-        Command::new("apt").arg("source").arg(self.name.as_str()).output()
+    pub fn get_source<P: AsRef<Path>>(&self, dest: P) -> io::Result<Output> {
+        Command::new("apt").arg("source").arg(self.name.as_str()).current_dir(dest).output()
     }
 }
 
