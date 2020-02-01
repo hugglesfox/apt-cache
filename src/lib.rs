@@ -24,7 +24,7 @@ use std::process::{Command, Output};
 
 #[derive(PartialEq, Deserialize, Serialize)]
 pub struct Package {
-    name: String,
+    pub name: String,
 }
 
 impl Package {
